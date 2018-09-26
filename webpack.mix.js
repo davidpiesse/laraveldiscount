@@ -15,10 +15,10 @@ require('laravel-mix-purgecss');
  */
 
 mix.js('resources/js/app.js', 'public/js')
+   .copy('node_modules/animate.css/animate.min.css','public/css/animate.css')
    .postCss('resources/css/app.css', 'public/css')
    .tailwind()
    .purgeCss()
-   .copy('node_modules/animate.css/animate.min.css','public/css/animate.css');
 
 if (mix.inProduction()) {
   mix.version();
