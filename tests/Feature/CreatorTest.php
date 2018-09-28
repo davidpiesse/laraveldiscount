@@ -3,21 +3,16 @@
 namespace Tests\Feature;
 
 use App\Creator;
+use App\Product;
 use Tests\TestCase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Exceptions\MissingDataException;
-use Illuminate\Database\QueryException;
 
 class CreatorTest extends TestCase
 {
     use RefreshDatabase;
-
-    // Functional tests
-    // Relationships
-    //Scopes
-    //Custom attributes
-    //Anything custom about the model
 
     /**
      * @test
@@ -25,6 +20,15 @@ class CreatorTest extends TestCase
     public function creatorCanOwnAProduct()
     {
         $this->assertTrue(true);
+
+        $c = factory(Creator::class)->make();
+
+        $p = factory(Product::class)->make();
+
+        dd($p);
+
+        $link = cloudinary_image($c->avatar);
+        dd($c, $link);
     }
 
     /**
@@ -47,6 +51,30 @@ class CreatorTest extends TestCase
      * @test
      */
     public function creatorCanOwnManyOffersThroughManyProducts()
+    {
+        $this->assertTrue(true);
+    }
+
+    /**
+     * @test
+     */
+    public function creatorCanRetrieveAnUploadedAvatar()
+    {
+        $this->assertTrue(true);
+
+        Storage::fake('avatars');
+
+        $avatar = UploadedFile::fake()->image('avatar.png');
+
+        $file = Storage::disk('avatars')->put('avatars',$avatar);
+
+        Storage::disk('avatars')->assertExists($file);
+    }
+
+    /**
+     * @test
+     */
+    public function creatorCanRetrieveAnUploadedAvatarWithCustomOptions()
     {
         $this->assertTrue(true);
     }

@@ -8,12 +8,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ProductTest extends TestCase
 {
-    // Functional tests
-    // Relationships
-    //Scopes
-    //Custom attributes
-    //Anything custom about the model
-
+    use RefreshDatabase;
+    
     /**
      * @test
      */
