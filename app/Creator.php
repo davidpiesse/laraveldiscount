@@ -3,34 +3,44 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\QueryException;
+use App\Exceptions\MissingDataException;
 
 class Creator extends Model
 {
     protected $guarded = [];
 
     public function customAvatar($options = []){
-        //Get a custom response from Cloudinary with the options included
-        //size
-        //black & white
-        //circle
-        //face detect
+        $defaults = collect([
+            'height' => 256,
+            'crop' => 'crop',
+            'gravity' => 'face',
+            'radius' => 'max'
+        ]);
+
+        return cloudinary_image($this->avatar,$defaults->merge($options));
+
+        // "height" => 128
+        // "crop" => "crop"
+        // "gravity" => "face"
+        // "effect" => "grayscale"
+        // "radius" => "max"
     }
 
     public function smallAvatar(){
         return $this->customAvatar([
-            'width' => 128,
             'height' => 128,
         ]);
     }
 
     public function greyscaleAvatar(){
         return $this->customAvatar([
-            'color' => 'grey'
+            'effect' => 'grayscale'
         ]);
     }
 
     //scope for advertisers
     public function scopeAdvertisers($query){
-        
+
     }
 }
