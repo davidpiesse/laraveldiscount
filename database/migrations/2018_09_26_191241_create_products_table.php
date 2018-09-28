@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->timestamps();
             $table->string('name');
             $table->unsignedInteger('creator_id');
-            $table->string('logo');
+            $table->string('logo')->nullable();
             $table->string('description');
             $table->string('link');
             $table->string('category')->nullable();
