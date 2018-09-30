@@ -22,7 +22,8 @@ class Offer extends Model
     public function scopeActive($query)
     {
         return $query->where('start_time', '<=', Carbon::now())
-            ->where('end_time', '>', Carbon::now());
+            ->where('end_time', '>', Carbon::now())
+            ->orderBy('end_time');
     }
 
     public function scopeExpired($query)
@@ -30,11 +31,11 @@ class Offer extends Model
         return $query->where('end_time', '<', Carbon::now());
     }
 
-    public function scopeExpiring ($query)
+    public function scopeExpiring($query)
     {
         return $query->active()
-        ->where('end_time' ,'<=', Carbon::now()->addDay())
-        ->orderByDesc('end_time'); //todo test
+            ->where('end_time', '<=', Carbon::now()->addDay())
+            ->orderBy('end_time');
     }
 
     public function scopeFuture($query)
@@ -47,34 +48,33 @@ class Offer extends Model
         return $query->future()->where('start_time', '<=', Carbon::now()->addWeek());
     }
 
-    public static function latest () {
+    public static function latest()
+    {
         return self::active()->orderByDesc('start_time')->first();
     }
 
     public function getDurationAttribute()
-    {   
+    {
         return $this->start_time->diff($this->end_time);
     }
 
     public function getUrlAttribute()
     {
-        if(!is_null(parse_url($this->link, PHP_URL_QUERY))){
-            return $this->link."&ref=laraveldiscount";
+        if (!is_null(parse_url($this->link, PHP_URL_QUERY))) {
+            return $this->link . "&ref=laraveldiscount";
         }
-        return $this->link."?ref=laraveldiscount";
+        return $this->link . "?ref=laraveldiscount";
     }
 
-    public static function promotedOffers($maximum) //assume this can only be 2,4,6,8
+    public static function promotedOffers($maximum = 4) //assume this can only be 2,4,6,8
     {
-        $offers = self::active()->orderBy('end_time')->take($maximum)->get();
-        
+        $offers = self::active()->take($maximum)->get();
+
         $start_index = (Carbon::now()->hour) % $maximum; // (0-23)
-    
-        $start_chunk = $offers->splice($start_index);
-        
-        $offers = $start_chunk->merge($offers);
-        
-        return $offers;
+
+        $start_chunk = $offers->splice((Carbon::now()->hour % $maximum));
+
+        return $start_chunk->merge($offers);
     }
 
 }
