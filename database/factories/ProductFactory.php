@@ -9,7 +9,9 @@ $factory->define(Product::class, function (Faker $faker) {
     $creator = factory(Creator::class)->create();
 
     return [
-        'creator_id' => $creator->id,
+        'creator_id' => function () {
+            return factory(Creator::class)->create()->id;
+        },
         'name' => ucwords($faker->domainWord()),
         'logo' => 'v1538130565/product1.png',
         'description' => $faker->sentence(),
@@ -17,3 +19,7 @@ $factory->define(Product::class, function (Faker $faker) {
         'category' => null
     ];
 });
+
+$factory->state(Product::class, 'without-creator', [
+    'creator_id' => null,
+]);

@@ -2,9 +2,12 @@
 
 namespace Tests\Feature;
 
+use App\Offer;
+use App\Product;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Carbon;
 
 class ProductTest extends TestCase
 {
@@ -15,7 +18,13 @@ class ProductTest extends TestCase
      */
     public function productMustHaveAnOwner()
     {
-        $this->assertTrue(true);
+        $this->expectExceptionCode(23000);
+
+        $product = factory(Product::class)->state('without-creator')->create();
+
+        //TODO Product throws cutom exception
+
+        //test a good product with creator_id
     }
 
     /**
@@ -23,7 +32,15 @@ class ProductTest extends TestCase
      */
     public function productCanHaveAnOffer()
     {
-        $this->assertTrue(true);
+        $product = factory(Product::class)->create();
+
+        $offer = factory(Offer::class)->make();
+
+        $product->offers()->save($offer);
+
+        $this->assertEquals($product->id, $offer->product_id);
+
+        $this->assertCount(1, $product->offers);
     }
 
     /**
@@ -31,30 +48,14 @@ class ProductTest extends TestCase
      */
     public function productCanHaveManyOffers()
     {
-        $this->assertTrue(true);
-    }
+        $product = factory(Product::class)->create();
 
-    /**
-     * @test
-     */
-    public function productHasActiveOffers()
-    {
-        $this->assertTrue(true);
-    }
+        $offers = factory(Offer::class,3)
+        ->make()
+        ->each(function($offer) use ($product){
+            $product->offers()->save($offer);
+        });
 
-    /**
-     * @test
-     */
-    public function productHasExpiredOffers()
-    {
-        $this->assertTrue(true);
-    }
-
-    /**
-     * @test
-     */
-    public function productHasUpcomingOffers()
-    {
-        $this->assertTrue(true);
+        $this->assertCount(3, $product->offers);
     }
 }

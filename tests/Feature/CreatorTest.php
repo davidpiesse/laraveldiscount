@@ -9,26 +9,41 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Cloudinary;
+use App\Offer;
 
 class CreatorTest extends TestCase
 {
     use RefreshDatabase;
+
+
+    // $l = Cloudinary::make('test.png')->size128();
+
+    // $c = factory(Creator::class)->make();
+
+    // $p = factory(Product::class)->make();
+
+    // $p = factory(Product::class)->state('without-creator')->make();
+
+    // $link = cloudinary_image($c->avatar);
 
     /**
      * @test
      */
     public function creatorCanOwnAProduct()
     {
-        $this->assertTrue(true);
+        $creator = factory(Creator::class)->create();
 
-        $c = factory(Creator::class)->make();
+        $product = factory(Product::class)
+            ->state('without-creator')
+            ->make();
 
-        $p = factory(Product::class)->make();
+        $creator->products()
+            ->save($product);
 
-        dd($p);
+        $this->assertEquals($creator->id, $product->creator_id);
 
-        $link = cloudinary_image($c->avatar);
-        dd($c, $link);
+        $this->assertCount(1, $creator->products);
     }
 
     /**
@@ -36,7 +51,17 @@ class CreatorTest extends TestCase
      */
     public function creatorCanOwnManyProducts()
     {
-        $this->assertTrue(true);
+        $creator = factory(Creator::class)->create();
+
+        $products = factory(Product::class, 3)
+            ->state('without-creator')
+            ->make()
+            ->each(function ($product) use ($creator) {
+                $creator->products()
+                    ->save($product);
+            });
+
+        $this->assertCount(3, $creator->products);
     }
 
     /**
@@ -44,15 +69,18 @@ class CreatorTest extends TestCase
      */
     public function creatorCanOwnOffersThroughAProduct()
     {
-        $this->assertTrue(true);
-    }
 
-    /**
-     * @test
-     */
-    public function creatorCanOwnManyOffersThroughManyProducts()
-    {
-        $this->assertTrue(true);
+        $creator = factory(Creator::class)->create();
+
+        $product = factory(Product::class)->create([
+            'creator_id' => $creator->id
+        ]);
+
+        $offer = factory(Offer::class)->create([
+            'product_id' => $product->id
+        ]);
+
+        $this->assertCount(1, $creator->offers);
     }
 
     /**
@@ -66,7 +94,7 @@ class CreatorTest extends TestCase
 
         $avatar = UploadedFile::fake()->image('avatar.png');
 
-        $file = Storage::disk('avatars')->put('avatars',$avatar);
+        $file = Storage::disk('avatars')->put('avatars', $avatar);
 
         Storage::disk('avatars')->assertExists($file);
     }
