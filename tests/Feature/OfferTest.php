@@ -276,4 +276,6 @@ class OfferTest extends TestCase
         $this->assertEquals($active_offer3->id, Offer::latest()->id);
 
     }
+
+    
 }

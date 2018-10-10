@@ -26,14 +26,15 @@ class Creator extends Model
 
     public function customAvatar($options = [])
     {
-        $defaults = collect([
+        $defaults = collect([[
             'height' => 256,
             'crop' => 'crop',
             'gravity' => 'face',
             'radius' => 'max'
+        ]
         ]);
 
-        return cloudinary_image($this->avatar, $defaults->merge($options));
+        return cloudinary_image($this->avatar, $defaults->merge($options)->toArray());
 
         // "height" => 128
         // "crop" => "crop"
@@ -45,7 +46,7 @@ class Creator extends Model
     public function smallAvatar()
     {
         return $this->customAvatar([
-            'height' => 128,
+            'height' => 512,
         ]);
     }
 

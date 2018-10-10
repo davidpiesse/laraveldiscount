@@ -9,6 +9,13 @@ class Offer extends Model
 {
     protected $guarded = [];
 
+    public $with = ['product']; //Add creator
+
+    public $casts = [
+        'start_time' => 'datetime',
+        'end_time' => 'datetime',
+    ];
+
     public function product()
     {
         return $this->belongsTo(Product::class);
@@ -31,23 +38,43 @@ class Offer extends Model
         return $query->where('end_time', '<', Carbon::now());
     }
 
-    public function scopeExpiring($query)
+    public function scopeExpiringBefore($query, $before_datetime)
     {
         return $query->active()
-            ->where('end_time', '<=', Carbon::now()->addDay())
+            ->where('end_time', '<=', $before_datetime)
             ->orderBy('end_time');
+    }
+
+    public function scopeExpiring($query)
+    {
+        return $query->expiringBefore(Carbon::now()->addDay());
+    }
+
+    public function scopeExpiringThisWeek($query)
+    {
+        return $this->expiringBefore(Carbon::now()->addWeek());
     }
 
     public function scopeFuture($query)
     {
         return $query->where('start_time', '>', Carbon::now());
     }
+    
+    public function scopeUpcomingBefore($query, $before_datetime)
+    {
+        return $query->future()->where('start_time', '<=', $before_datetime);
+    }
 
     public function scopeUpcoming($query)
     {
-        return $query->future()->where('start_time', '<=', Carbon::now()->addWeek());
+        return $query->upcomingBefore(Carbon::now()->addWeek());
     }
 
+    public function scopeUpcomingTomorrow($query)
+    {
+        return $query->upcomingBefore(Carbon::now()->addDay());
+    }
+    
     public static function latest()
     {
         return self::active()->orderByDesc('start_time')->first();
@@ -56,6 +83,11 @@ class Offer extends Model
     public function getDurationAttribute()
     {
         return $this->start_time->diff($this->end_time);
+    }
+
+    public function getExpiresInAttribute()
+    {
+        return now()->diffInDays($this->end_time);
     }
 
     public function getUrlAttribute()

@@ -11,6 +11,5 @@ class CreatorSeeder extends Seeder
      */
     public function run()
     {
-        //
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Spatie\BladeX\Facades\BladeX;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,6 +15,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+
+        // BladeX::component('components.myAlert','my-alert');
+        // BladeX::components('components');
+        BladeX::component('components.*');
     }
 
     /**

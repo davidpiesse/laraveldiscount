@@ -15,4 +15,10 @@ class Product extends Model
     public function offers(){
         return $this->hasMany(Offer::class);
     }
+
+    public function getLogoUrlAttribute()
+    {
+        //TODO adjust with cloudinary
+        return Cloudinary::make($this->logo)->url();
+    }
 }
