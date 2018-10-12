@@ -9,16 +9,16 @@ class Cloudinary
 
     public $options = [];
 
-    public function __construct($image)
+    public function __construct($image, $options = [])
     {
         $this->cloudinary_image = $image;
 
-        $this->options = [];
+        $this->options = $options;
     }
 
-    public static function make($image)
+    public static function make($image, $options = [])
     {
-        return new self($image);
+        return new self($image, $options);
     }
 
     //TODO

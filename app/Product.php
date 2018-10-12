@@ -19,6 +19,11 @@ class Product extends Model
     public function getLogoUrlAttribute()
     {
         //TODO adjust with cloudinary
-        return Cloudinary::make($this->logo)->url();
+        return Cloudinary::make($this->logo, [
+            'crop' => 'lpad',
+            'gravity' => 'center',
+            'height' => 128,
+            'width' => 128,
+        ])->url();
     }
 }

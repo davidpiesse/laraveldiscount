@@ -1,8 +1,8 @@
-<div class="h-full w-full flex border border-green rounded shadow">
+<a href="{{ $offer->url }}" class="h-full w-full flex border border-green rounded shadow no-underline hover:shadow-lg">
     <div class="h-auto lg:w-48 py-4 pl-4 flex items-center bg-cover text-center overflow-hidden">
         <img src="{{ $offer->product->logoUrl }}" alt="">
     </div>
-    <div class="bg-white w-full p-4 flex flex-col justify-around leading-normal">
+    <div class=" w-full p-4 flex flex-col justify-around leading-normal">
         <div class="mb-8">
         <div class="text-black font-bold text-xl mb-2">{{$offer->title}}</div>
         <p class="text-grey-darker text-base">{{ $offer->product->description }}</p>
@@ -18,4 +18,4 @@
         </div>
         </div>
     </div>
-</div>
+</a>
