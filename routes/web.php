@@ -16,6 +16,8 @@ Route::get('/', function (Request $request){
     return view('welcome');
 });
 
+Route::get('/preview/{hash}', 'PreviewController');
+
 
 // Auth::routes();
 
