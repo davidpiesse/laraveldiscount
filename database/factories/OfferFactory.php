@@ -5,7 +5,14 @@ use App\Product;
 use Faker\Generator as Faker;
 use Illuminate\Support\Carbon;
 
-$factory->define(Offer::class, function (Faker $faker) {
+$offers = [
+    '10% OFF',
+    '$100 OFF',
+    'FREE',
+    '10% OFF 12 MONTHS'
+];
+
+$factory->define(Offer::class, function (Faker $faker) use($offers){
 
     $start_day = rand(-20,20);
     $end_day = $start_day + rand(1,20);
@@ -13,12 +20,12 @@ $factory->define(Offer::class, function (Faker $faker) {
         'product_id' => function(){
             return factory(Product::class)->create()->id;
         },
-        'title' => $faker->words(4, true),
+        'title' => array_random($offers),
         'start_time' => Carbon::now()->addDays($start_day),
         'end_time' => Carbon::now()->addDays($end_day),
         'offer_type' => 'CODE',
         'link' => $faker->url(),
-        'code' => '10% off',
+        'code' => '10OFF',
     ];
 
 //     * Product ID

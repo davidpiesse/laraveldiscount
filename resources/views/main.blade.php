@@ -22,6 +22,10 @@
             <div class="text-grey-darker text-center font-thin tracking-wide text-3xl">Laravel Discount</div>
         </div>
 
+        <div class="pb-4 text-center font-hairline text-xl tracking-wide text-grey-darkest">
+            Discounts for the Laravel community - all in one place
+        </div>
+
         {{--  Promoted  --}}
         <div class="mb-4 flex items-stretch">
             <div class="w-1/2 px-4">
@@ -37,14 +41,11 @@
         {{--  Active  --}}
         <div class="w-full text-center text-grey-dark">Active Offers</div>
         <div class="mb-4 flex px-4">
-
             @foreach($activeOffers as $offer)
             <div class="w-1/3 p-2">    
                 <box-offer :offer="$offer"></box-offer>
             </div>
             @endForeach
-
-            
         </div>
 
         {{--  Expiring  --}}
@@ -65,23 +66,5 @@
             @endForeach
         </div>
     </div>
-
-    {{--  <div class="flex flex-col">
-        <div class="min-h-screen flex items-center justify-center">
-            <div class="flex flex-col justify-around h-full items-center">
-                <h1 class="text-grey-darker text-center font-thin tracking-wide text-5xl mb-6">
-                    Laravel Discount
-                </h1>
-
-                @php
-                    $message = "Hi X"; 
-                @endphp
-
-                <my-alert type="error" :message="$message" class="text-grey-darker text-center font-thin tracking-wide text-xl mb-6" />
-            </div>
-        </div>
-    </div>  --}}
-
-
 </body>
 </html>

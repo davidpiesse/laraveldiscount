@@ -1,29 +1,21 @@
 <?php
 
 use App\Offer;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use App\Http\Controllers\FrontController;
 
-Route::view('/', 'welcome');
+Route::get('/', function (Request $request){
 
-Route::get('/main', function(){
+    $live = Carbon::createFromTimestampUTC(config('config.live_at'));
 
-    $promotedOffer = Offer::first();
+    if($live->lessThan(now()) || config('app.env') == 'local'){
+        return app()->make(FrontController::class)->callAction('index', []);
+    }
 
-    $topOffers = Offer::skip(1)->take(3)->get();
-
-    $activeOffers = Offer::latest()->take(3)->get();
-
-    $expiringOffers = Offer::expiringThisWeek()->take(3)->get();
-
-    $upcomingOffers = Offer::upcoming()->take(6)->get();
-
-    return view('main', [
-        'promotedOffer' => $promotedOffer,
-        'topOffers' => $topOffers,
-        'activeOffers' => $activeOffers,
-        'upcomingOffers' => $upcomingOffers,
-        'expiringOffers' => $expiringOffers,
-    ]);
+    return view('welcome');
 });
+
 
 // Auth::routes();
 
