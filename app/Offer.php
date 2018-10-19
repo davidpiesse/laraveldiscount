@@ -87,7 +87,12 @@ class Offer extends Model
 
     public function getExpiresInAttribute()
     {
-        return now()->diffInDays($this->end_time);
+        $expires_in_days = now()->diffInDays($this->end_time);
+
+        if($expires_in_days > 0)
+            return $expires_in_days . ' days';
+        else
+            return now()->diffInHours($this->end_time) . ' hours';
     }
 
     public function getUrlAttribute()

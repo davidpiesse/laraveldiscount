@@ -12,7 +12,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
 </head>
-<body class="bg-grey-lighter font-sans font-normal antialiased">
+<body class="bg-grey-lighter font-sans font-normal antialiased h-full">
 
     <div class="container mx-auto h-full bg-white pt-6">
         <div class="flex justify-center items-center mb-4">
@@ -31,10 +31,12 @@
             <div class="w-1/2 px-4">
                 <promoted-offer :offer="$promotedOffer"></promoted-offer>
             </div>
-            <div class="w-1/2 px-4 flex-col justify-around">
-                @foreach($topOffers as $offer)
-                    <top-offer :offer="$offer"></top-offer>
-                @endForeach
+            <div class="w-1/2 px-4">
+                <div class="h-full flex-col justify-between">
+                    @foreach($topOffers as $offer)
+                        <top-offer :offer="$offer"></top-offer>
+                    @endForeach
+                </div>
             </div>
         </div>
 
