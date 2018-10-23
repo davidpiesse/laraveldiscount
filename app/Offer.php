@@ -4,12 +4,15 @@ namespace App;
 
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Offer extends Model
 {
+    use Notifiable;
+
     protected $guarded = [];
 
-    public $with = ['product']; //Add creator
+    public $with = ['product'];
 
     public $casts = [
         'start_time' => 'datetime',
@@ -117,6 +120,11 @@ class Offer extends Model
         $start_chunk = $offers->splice((Carbon::now()->hour % $maximum));
 
         return $start_chunk->merge($offers);
+    }
+
+    public function twitterMessage()
+    {
+        return "New Offer! ". $this->title. ' ' . $this->product->name. ' @ LaravelDiscount.com';
     }
 
 }
