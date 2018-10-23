@@ -28,11 +28,11 @@
 
         <div class="bg-grey-lightest rounded w-full p-4">
             <h3>Creator</h3>
-            <ul class="list-reset bg-white rounded py-2">
-                <li>{{$creator->name}}</li>
-                <li>
+            <ul class="list-reset bg-white rounded py-2 p-4">
+                <li>Name: {{$creator->name}}</li>
+                <li>Image: 
                     <img 
-                        class="w-24 h-24 rounded-full bg-grey-lighter border-2" 
+                        class="w-24 h-24 rounded border" 
                         src="{{ cloudinary_image($creator->avatar) }}" alt="{{ $creator->avatar }}" />
                 </li>
             </ul>
@@ -43,14 +43,14 @@
 
             @foreach($creator->products as $product)
             <div class="py-2 bg-white rounded">
-                <ul class="list-reset">
-                    <li><h4>{{$product->name}}</h4></li>
-                    <li>{{$product->description}}</li>
-                    <li><a href="{{$product->link}}" target="_blank">{{$product->link}}</a></li>
-                    <li>{{$product->category}}</li>
-                    <li>
+                <ul class="list-reset p-4">
+                    <li>Name: <h4>{{$product->name}}</h4></li>
+                    <li>Description: {{$product->description}}</li>
+                    <li>Link: <a href="{{$product->link}}" target="_blank">{{$product->link}}</a></li>
+                    <li>Category: {{$product->category}}</li>
+                    <li>Logo: 
                         <img 
-                            class="w-24 h-24 rounded-full bg-grey-lighter border-2" 
+                            class="w-24 h-24 rounded border" 
                             src="{{ $product->logoUrl }}" alt="{{ $product->logoUrl }}" />
                     </li>
                 </ul>
@@ -64,7 +64,7 @@
             @foreach($creator->offers as $offer)
             {{--  {{dd($offer)}}  --}}
             <div class="py-2 bg-white rounded">
-                <ul class="list-reset">
+                <ul class="list-reset  p-4">
                     <li>For {{ $offer->product->name }}</li>
                     <li>{{$offer->title}}</li>
                     <li><a href="{{$offer->url}}" target="_blank">{{$offer->url}}</a></li>
@@ -72,16 +72,17 @@
                     <li>Ends: {{$offer->end_time->toFormattedDateString()}}</li>
                     <li>Code: {{$offer->code}}</li>
                 </ul>
+                <div class="py-2 ml-2 bg-white rounded w-1/2"> 
+                    <promoted-offer :offer="$offer"></promoted-offer>
+                </div>
+                <div class="py-2 ml-2 bg-white rounded w-1/2"> 
+                    <top-offer :offer="$offer"></top-offer>
+                </div>
+                <div class="py-2 ml-2 bg-white rounded w-1/3"> 
+                    <box-offer :offer="$offer"></box-offer>
+                </div>
             </div>
-            <div class="py-2 bg-white rounded w-1/2"> 
-                <promoted-offer :offer="$offer"></promoted-offer>
-            </div>
-            <div class="py-2 bg-white rounded w-1/2"> 
-                <top-offer :offer="$offer"></top-offer>
-            </div>
-            <div class="py-2 bg-white rounded w-1/3"> 
-                <box-offer :offer="$offer"></box-offer>
-            </div>
+           
             @endforeach
         </div>
 

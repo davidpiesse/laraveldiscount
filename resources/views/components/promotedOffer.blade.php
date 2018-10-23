@@ -2,7 +2,7 @@
     target="_blank" 
     class="h-full w-full flex border border-l-8 border-green rounded shadow-md no-underline hover:shadow-lg animated pulse delay-2s">
     <div class="h-auto lg:w-48 py-4 pl-4 flex items-center bg-cover text-center overflow-hidden">
-        <img src="{{ $offer->product->logoUrl }}" alt="">
+        <img class="rounded" src="{{ $offer->product->logoUrl }}" alt="">
     </div>
     <div class=" w-full p-4 flex flex-col justify-around leading-normal">
         <div class="mb-8 block">
