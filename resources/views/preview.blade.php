@@ -1,20 +1,6 @@
-<!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('main')
 
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
-</head>
-<body class="bg-grey-lighter font-sans font-normal antialiased">
-
-    
+@section('content')
     <div class="container mx-auto h-full bg-white py-6 px-4">
         <div class="flex justify-center items-center mb-4">
             <div class="pr-4">    
@@ -88,5 +74,4 @@
         </div>
 
     </div>
-</body>
-</html>
+@endsection
