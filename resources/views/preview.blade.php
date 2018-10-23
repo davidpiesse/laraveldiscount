@@ -28,7 +28,7 @@
 
         <div class="bg-grey-lightest rounded w-full p-4">
             <h3>Creator</h3>
-            <ul class="list-reset py-2">
+            <ul class="list-reset bg-white rounded py-2">
                 <li>{{$creator->name}}</li>
                 <li>
                     <img 
@@ -72,6 +72,15 @@
                     <li>Ends: {{$offer->end_time->toFormattedDateString()}}</li>
                     <li>Code: {{$offer->code}}</li>
                 </ul>
+            </div>
+            <div class="py-2 bg-white rounded w-1/2"> 
+                <promoted-offer :offer="$offer"></promoted-offer>
+            </div>
+            <div class="py-2 bg-white rounded w-1/2"> 
+                <top-offer :offer="$offer"></top-offer>
+            </div>
+            <div class="py-2 bg-white rounded w-1/3"> 
+                <box-offer :offer="$offer"></box-offer>
             </div>
             @endforeach
         </div>

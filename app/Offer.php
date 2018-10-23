@@ -85,6 +85,11 @@ class Offer extends Model
         return $this->start_time->diff($this->end_time);
     }
 
+    public function getHasCodeAttribute()
+    {
+        return !is_null($this->code) && $this->offer_type == 'CODE';
+    }
+
     public function getExpiresInAttribute()
     {
         $expires_in_days = now()->diffInDays($this->end_time);

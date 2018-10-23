@@ -4,10 +4,12 @@
     </div>
     <div class="p-2 flex flex-col justify-between leading-normal w-full">
         <div class="flex items-baseline justify-between">
-            <div class="text-black font-bold text-lg">{{ $offer->title }} - <span class="text-base font-thin">{{ $offer->product->name }}</span></div>
+            <div class="text-black font-bold text-lg"><span class="text-base font-thin">{{ $offer->product->name }}</span> - {{ $offer->title }}</div>
+            @if($offer->hasCode)
             <div class="text-grey text-sm"> 
                 CODE: <span class="font-bold text-green-dark text-xl">{{ $offer->code }}</span>
             </div>
+            @endif
         </div>
         <div class="text-sm text-grey-dark flex items-baseline justify-between">
             <div class=""> 
