@@ -27,8 +27,8 @@
         </div>
 
         {{--  Promoted  --}}
-        <div class="mb-4 flex items-stretch">
-            <div class="w-1/2 px-4">
+        <div class="mb-2 flex items-stretch">
+            <div class="w-1/2 px-4 mb-2">
                 <promoted-offer :offer="$promotedOffer"></promoted-offer>
             </div>
             <div class="w-1/2 px-4">
@@ -42,9 +42,9 @@
 
         {{--  Active  --}}
         <div class="w-full text-center text-grey-dark">Active Offers</div>
-        <div class="mb-4 flex px-4">
+        <div class="mb-4 flex flex-wrap justify-center px-4">
             @foreach($activeOffers as $offer)
-            <div class="w-1/3 p-2">    
+            <div class="w-1/3 p-2 self-stretch">    
                 <box-offer :offer="$offer"></box-offer>
             </div>
             @endForeach
@@ -52,9 +52,9 @@
 
         {{--  Expiring  --}}
         <div class="w-full text-center text-grey-dark">Offers Expiring Soon</div>
-        <div class="mb-4 flex px-4">
+        <div class="mb-4 flex flex-wrap justify-center px-4">
             @foreach($expiringOffers as $offer)
-            <div class="w-1/3 p-2">    
+            <div class="w-1/3 p-2 ">    
                 <box-offer :offer="$offer"></box-offer>
             </div>
             @endForeach
@@ -62,7 +62,7 @@
 
         {{--  Upcoming  --}}
         <div class="w-full text-center text-grey-dark">Upcoming Product Offers</div>
-        <div class="mb-4 flex px-4 justify-around">
+        <div class="mb-4 flex px-4 flex-wrap justify-around">
             @foreach($upcomingOffers as $offer)
                 <upcoming-offer :offer="$offer"></upcoming-offer>
             @endForeach

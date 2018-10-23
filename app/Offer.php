@@ -103,9 +103,9 @@ class Offer extends Model
     public function getUrlAttribute()
     {
         if (!is_null(parse_url($this->link, PHP_URL_QUERY))) {
-            return $this->link . "&ref=laraveldiscount";
+            return $this->link . "&referrer=laraveldiscount";
         }
-        return $this->link . "?ref=laraveldiscount";
+        return $this->link . "?referrer=laraveldiscount";
     }
 
     public static function promotedOffers($maximum = 4) //assume this can only be 2,4,6,8

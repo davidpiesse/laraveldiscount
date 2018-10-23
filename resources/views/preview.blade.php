@@ -44,7 +44,7 @@
             @foreach($creator->products as $product)
             <div class="py-2 bg-white rounded">
                 <ul class="list-reset p-4">
-                    <li>Name: <h4>{{$product->name}}</h4></li>
+                    <li><h4>{{$product->name}}</h4></li>
                     <li>Description: {{$product->description}}</li>
                     <li>Link: <a href="{{$product->link}}" target="_blank">{{$product->link}}</a></li>
                     <li>Category: {{$product->category}}</li>

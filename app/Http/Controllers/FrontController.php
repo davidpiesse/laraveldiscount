@@ -15,9 +15,9 @@ class FrontController extends Controller
 
         $topOffers = Offer::promotedOffers(4)->shift(1)->take(3)->get();
 
-        $activeOffers = Offer::latest()->take(3)->get();
+        $activeOffers = Offer::latest()->get();
 
-        $expiringOffers = Offer::expiringThisWeek()->take(3)->get();
+        $expiringOffers = Offer::expiringThisWeek()->get();
 
         $upcomingOffers = Offer::upcoming()->take(6)->get();
 
