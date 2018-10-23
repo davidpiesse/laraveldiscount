@@ -14,6 +14,7 @@
 </head>
 <body class="bg-grey-lighter font-sans font-normal antialiased">
 
+    
     <div class="container mx-auto h-full bg-white py-6 px-4">
         <div class="flex justify-center items-center mb-4">
             <div class="pr-4">    

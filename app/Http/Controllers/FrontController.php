@@ -9,7 +9,7 @@ class FrontController extends Controller
 {
     public function index()
     {
-        $promotedOffers = Offer::promotedOffers(4);
+        $promotedOffers = Offer::promotedOffers(2);
 
         $promotedOffer = $promotedOffers->first();
 
@@ -21,7 +21,7 @@ class FrontController extends Controller
 
         $upcomingOffers = Offer::upcoming()->take(6)->get();
 
-        return view('main', [
+        return view('front', [
             'promotedOffer' => $promotedOffer,
             'topOffers' => $topOffers,
             'activeOffers' => $activeOffers,
