@@ -20,6 +20,8 @@ class PreviewController extends Controller
             abort(404);
         }
 
+        dd($creator, $hashid);
+        
         return view('preview', ['creator' => $creator]);
     }
 }
