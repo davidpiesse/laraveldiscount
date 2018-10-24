@@ -20,7 +20,7 @@
         </div>
 
         <div class="flex items-center">
-            <img class="w-10 h-10 rounded-full mr-4" src="{{ $offer->creator->avatarUrl() }}" alt="{{ $offer->creator->name }}">
+            <img class="w-10 h-10 rounded-full mr-4" src="{{ $offer->creator->avatarUrl }}" alt="{{ $offer->creator->name }}">
             <div class="text-sm">
                 <p class="text-grey-darker leading-none pb-1">made by</p>
                 <p class="text-black leading-none">{{ $offer->creator->name }}</p>
