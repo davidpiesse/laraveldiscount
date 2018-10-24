@@ -43,6 +43,17 @@ class Creator extends Model
         // "radius" => "max"
     }
 
+    public function getAvatarUrlAttribute()
+    {
+        //TODO adjust with cloudinary
+        return Cloudinary::make($this->avatar, [
+            'crop' => 'lpad',
+            'gravity' => 'center',
+            'height' => 128,
+            'width' => 128,
+        ])->url();
+    }
+
     public function smallAvatar()
     {
         return $this->customAvatar([

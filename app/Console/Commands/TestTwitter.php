@@ -39,7 +39,11 @@ class TestTwitter extends Command
      */
     public function handle()
     {
-        $offer = Offer::first();
-        dispatch_now(new PostNewOfferTweet($offer));
+        //Use to test schedule for new offer
+        //new (just went live)
+        //expiring (ending in next 24 hours)
+
+        // $offer = Offer::first();
+        // dispatch_now(new PostNewOfferTweet($offer));
     }
 }

@@ -20,7 +20,7 @@
                 <li>Image: 
                     <img 
                         class="w-24 h-24 rounded border" 
-                        src="{{ cloudinary_image($creator->avatar) }}" alt="{{ $creator->avatar }}" />
+                        src="{{ $creator->avatarUrl }}" alt="{{ $creator->avatar }}" />
                 </li>
             </ul>
         </div>
