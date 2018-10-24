@@ -29,6 +29,6 @@ class CheckForExpiringOffers implements ShouldQueue
      */
     public function handle()
     {
-        //
+        //get any offer expiring in 24 hours time
     }
 }

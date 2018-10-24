@@ -7,6 +7,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use App\Offer;
 
 class CheckForNewOffers implements ShouldQueue
 {
@@ -29,6 +30,9 @@ class CheckForNewOffers implements ShouldQueue
      */
     public function handle()
     {
-        //
+        //get any offers tarting in the next 24 hours
+        $upcoming_offers = Offer::upcomingTomorrow()->get();
+
+        dump($upcoming_offers);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Offer;
 use App\Jobs\PostNewOfferTweet;
+use App\Jobs\CheckForNewOffers;
 
 class TestTwitter extends Command
 {
@@ -45,5 +46,7 @@ class TestTwitter extends Command
 
         // $offer = Offer::first();
         // dispatch_now(new PostNewOfferTweet($offer));
+
+        dispatch_now(new CheckForNewOffers());
     }
 }

@@ -124,7 +124,7 @@ class Offer extends Model
 
     public function twitterMessage()
     {
-        return "New Offer! ". $this->title. ' ' . $this->product->name. ' @ LaravelDiscount.com';
+        return $this->title. ' ' . $this->product->name. ' @ LaravelDiscount.com';
     }
 
 }

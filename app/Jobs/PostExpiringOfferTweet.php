@@ -2,8 +2,10 @@
 
 namespace App\Jobs;
 
+use App\Offer;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
+use App\Notifications\ExpiringOfferSoon;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -12,14 +14,16 @@ class PostExpiringOfferTweet implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    public $offer;
+
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Offer $offer)
     {
-        //
+        $this->offer = $offer;
     }
 
     /**
@@ -29,6 +33,6 @@ class PostExpiringOfferTweet implements ShouldQueue
      */
     public function handle()
     {
-        //
+        return $this->offer->notify(new ExpiringOfferSoon());
     }
 }

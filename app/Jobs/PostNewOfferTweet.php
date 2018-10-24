@@ -2,13 +2,13 @@
 
 namespace App\Jobs;
 
+use App\Offer;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
+use App\Notifications\NewOfferLaunched;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use App\Offer;
-use App\Notifications\NewOfferLaunched;
 
 class PostNewOfferTweet implements ShouldQueue
 {

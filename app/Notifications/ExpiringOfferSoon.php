@@ -7,12 +7,11 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use NotificationChannels\Twitter\TwitterChannel;
-use NotificationChannels\Twitter\TwitterStatusUpdate;
 
-class NewOfferLaunched extends Notification
+class ExpiringOfferSoon extends Notification
 {
     use Queueable;
-    
+
     public function __construct()
     {
         //
@@ -23,10 +22,10 @@ class NewOfferLaunched extends Notification
         return [TwitterChannel::class];
     }
 
+
     public function toTwitter($notifiable)
     {
-        dump((new TwitterStatusUpdate("New Offer! ".  $notifiable->twitterMessage()))->withImage($notifiable->product->logoUrl));
+        dump((new TwitterStatusUpdate("Expriring Soon! ".  $notifiable->twitterMessage()))->withImage($notifiable->product->logoUrl));
         return;
     }
-
 }
