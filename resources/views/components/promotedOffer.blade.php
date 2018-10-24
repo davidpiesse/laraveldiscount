@@ -10,15 +10,15 @@
                 <span class="text-grey-darker font-thin">{{ $offer->product->name }}</span>
             </div>
             @if($offer->hasDescription)
-            <p class="text-sm text-grey-dark mb-2">
+            <p class="text-sm text-grey-darker mb-2">
                 {{$offer->description}}
             </p>
             @elseif($offer->hasCode)
-            <p class="text-sm text-grey-dark mb-2">
+            <p class="text-sm text-grey-darker mb-2">
                 Use Code: <span class="font-bold text-green-dark text-xl">{{ $offer->code }}</span>
             </p>
             @endif
-            <p class="text-sm text-grey-dark mb-2 italic">
+            <p class="text-sm text-grey mb-2 italic">
                 Offer expires in {{ $offer->expiresIn }}
             </p>
         </div>

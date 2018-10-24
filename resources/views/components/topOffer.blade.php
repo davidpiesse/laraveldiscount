@@ -4,18 +4,23 @@
     </div>
     <div class="p-2 flex flex-col justify-between leading-normal w-full">
         <div class="flex items-baseline justify-between">
-            <div class="text-black font-bold text-lg"><span class="text-base font-thin">{{ $offer->product->name }}</span> - {{ $offer->title }}</div>
-            @if($offer->hasCode)
-            <div class="text-grey text-sm"> 
-                CODE: <span class="font-bold text-green-dark text-xl">{{ $offer->code }}</span>
-            </div>
+            <div class="text-black font-bold text-lg">{{ $offer->title }} - <span class="text-base font-thin text-grey-darker">{{ $offer->product->name }}</span></div>
+            @if($offer->hasDescription)
+            <p class="text-sm text-grey-darker mb-2">
+                {{$offer->description}}
+            </p>
+            @elseif($offer->hasCode)
+            <p class="text-sm text-grey-darker mb-2">
+                Use Code: <span class="font-bold text-green-dark text-xl">{{ $offer->code }}</span>
+            </p>
             @endif
         </div>
         <div class="text-sm text-grey-dark flex items-baseline justify-between">
-            <div class=""> 
-                Created by {{ $offer->creator->name }}
+            <div class="flex items-start"> 
+                Created by {{ $offer->creator->name }} 
+                <img class="ml-2" src="{{$offer->creator->avatarUrl}}" width="24" height="24" alt="">
             </div>
-            <div class=""> 
+            <div class="italic text-grey"> 
                 Expires in {{ $offer->expiresIn }}
             </div>      
         </div>
