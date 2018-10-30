@@ -7,9 +7,12 @@ use App\Http\Controllers\FrontController;
 
 Route::get('/', function (Request $request){
 
+    // Carbon::setTestNow(Carbon::create(2018,10,31,14,0,0));
+
     $live = Carbon::createFromTimestampUTC(config('config.live_at'));
 
     if($live->lessThan(now()) || config('app.env') == 'local'){
+    // if($live->lessThanOrEqualTo(now()) ){
         return app()->make(FrontController::class)->callAction('index', []);
     }
 

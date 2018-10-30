@@ -1,4 +1,4 @@
-<a href="{{$offer->url}}" target="_blank" class="max-w-md w-full bg-white lg:flex border border-grey-light rounded mb-2 no-underline hover:shadow-md border-l-4">
+<a href="{{$offer->url}}" target="_blank" class="w-full bg-white flex border border-grey-light rounded mb-2 no-underline hover:shadow-md border-l-4">
     <div class="h-16 w-16 p-2 flex items-center bg-cover text-center overflow-hidden" >
         <img src="{{ $offer->product->logoUrl }}" alt="">
     </div>
@@ -21,7 +21,7 @@
                 <img class="ml-2" src="{{$offer->creator->avatarUrl}}" width="24" height="24" alt="">
             </div>
             <div class="italic text-grey"> 
-                Expires in {{ $offer->expiresIn }}
+                {{ ucfirst($offer->expiresIn) }}
             </div>      
         </div>
     </div>

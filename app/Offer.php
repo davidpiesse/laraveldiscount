@@ -103,9 +103,12 @@ class Offer extends Model
         $expires_in_days = now()->diffInDays($this->end_time);
 
         if($expires_in_days > 0)
-            return $expires_in_days . ' days';
+            if($expires_in_days > 31)
+                return 'expires in ' . now()->diffInMonths($this->end_time) . ' ' . str_plural('month',now()->diffInMonths($this->end_time));
+            else
+                return 'expires in ' . $expires_in_days . ' ' . str_plural('day', $expires_in_days);
         else
-            return now()->diffInHours($this->end_time) . ' hours';
+            return 'expires in ' . now()->diffInHours($this->end_time) . ' hours';
     }
 
     public function getUrlAttribute()
@@ -130,6 +133,23 @@ class Offer extends Model
     public function twitterMessage()
     {
         return $this->title. ' ' . $this->product->name. ' @ LaravelDiscount.com';
+    }
+
+    public static function sectionOffers(){
+
+        $active_offers = self::active()->get();
+
+        $shuffled_offers = $active_offers->shuffle();
+
+        $promoted_offer = $shuffled_offers->shift();
+
+        $top_offers = $shuffled_offers->splice(0,3);
+
+        return [
+            'promoted' => $promoted_offer,
+            'top' => $top_offers,
+            'active' => $shuffled_offers,
+        ];
     }
 
 }

@@ -21,7 +21,7 @@
             @endif
         </div>
         <div class="text-xs text-grey-dark text-right">
-            Expires in {{ $offer->expiresIn }}
+            {{ ucfirst($offer->expiresIn) }}
         </div>
     </div>
 </a>

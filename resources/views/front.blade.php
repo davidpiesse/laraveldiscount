@@ -1,7 +1,14 @@
 @extends('main')
 
 @section('content')
+    {{--  <div class="box">  --}}
+        {{--  </div>  --}}
+    <a class="fixed pin-t pin-r mt-32 no-underline z-10" href="https://goo.gl/forms/FY2WPOq5UuitWdn43" target="_blank">
+        <div class="sticky bg-red text-white p-2 rounded-l">ADD YOUR<br>PROMOTION</div>
+    </a>   
+
     <div class="container mx-auto h-full bg-white pt-6">
+
         <div class="flex justify-center items-center mb-4">
             <div class="pr-4">    
                 <logo class="text-grey-darker w-16 animated jackInTheBox slow"/>            
@@ -18,11 +25,11 @@
             </div>
         </div>
 
-        <div class="mb-2 flex items-stretch">
-            <div class="w-1/2 px-4 mb-2">
+        <div class="mb-2 block lg:flex items-stretch">
+            <div class="w-full lg:w-1/2 px-4 mb-2">
                 <promoted-offer :offer="$promotedOffer"></promoted-offer>
             </div>
-            <div class="w-1/2 px-4">
+            <div class="w-full lg:w-1/2 px-4">
                 <div class="h-full flex-col justify-between">
                     @foreach($topOffers as $offer)
                         <top-offer :offer="$offer"></top-offer>
@@ -34,7 +41,7 @@
         <div class="w-full text-center text-grey-dark">Active Offers</div>
         <div class="mb-4 flex flex-wrap justify-center px-4">
             @forelse($activeOffers as $offer)
-            <div class="w-1/3 p-2 self-stretch">    
+            <div class="w-full lg:w-1/3 p-2 self-stretch">    
                 <box-offer :offer="$offer"></box-offer>
             </div>
             @empty

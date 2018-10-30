@@ -9,22 +9,30 @@ class FrontController extends Controller
 {
     public function index()
     {
-        $promotedOffers = Offer::promotedOffers(2);
+        // $promotedOffers = Offer::promotedOffers(4);
 
-        $promotedOffer = $promotedOffers->first();
+        // $promotedOffer = $promotedOffers->first();
 
-        $topOffers = Offer::promotedOffers(4)->shift(1)->take(3)->get();
+        // if($promotedOffers->count() == 4){
+        //     $topOffers = $promotedOffers->shift(1)->take(3)->get();
+        // }else{
+        //     $topOffers = Offer::promotedOffers(3);
+        // }
 
-        $activeOffers = Offer::latest()->get();
+        // $activeOffers = Offer::active()->get();
+
+        $offers = Offer::sectionOffers();
+
+        // dd($offers);
 
         $expiringOffers = Offer::expiringThisWeek()->get();
 
-        $upcomingOffers = Offer::upcoming()->take(6)->get();
+        $upcomingOffers = Offer::future()->take(6)->get();
 
         return view('front', [
-            'promotedOffer' => $promotedOffer,
-            'topOffers' => $topOffers,
-            'activeOffers' => $activeOffers,
+            'promotedOffer' => $offers['promoted'],
+            'topOffers' => $offers['top'],
+            'activeOffers' => $offers['active'],
             'upcomingOffers' => $upcomingOffers,
             'expiringOffers' => $expiringOffers,
         ]);

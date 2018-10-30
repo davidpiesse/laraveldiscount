@@ -1,8 +1,8 @@
 <a href="{{ $offer->url }}" 
     target="_blank" 
-    class="h-full w-full flex border border-l-8 border-green rounded shadow-md no-underline hover:shadow-lg animated pulse delay-2s">
-    <div class="h-auto w-1/3 py-4 pl-4 flex items-center bg-cover text-center overflow-hidden">
-        <img class="rounded" src="{{ $offer->product->logoUrl }}" alt="">
+    class="h-full w-full block lg:flex border border-l-8 border-green rounded shadow-md no-underline hover:shadow-lg animated pulse delay-2s">
+    <div class="h-auto w-full lg:w-1/3 p-4 lg:py-4 lg:pl-4 flex items-center bg-cover text-center overflow-hidden">
+        <img class="rounded" src="{{ $offer->product->logoUrl }}" alt="" class="content-center">
     </div>
     <div class=" w-full p-4 flex flex-col justify-around leading-normal">
         <div class="mb-8 block">
@@ -19,7 +19,7 @@
             </p>
             @endif
             <p class="text-sm text-grey mb-2 italic">
-                Offer expires in {{ $offer->expiresIn }}
+                Offer {{ $offer->expiresIn }}
             </p>
         </div>
 
@@ -28,7 +28,7 @@
                 <p class="text-grey-darker leading-none pb-1">made by</p>
                 <p class="text-black leading-none">{{ $offer->creator->name }}</p>
             </div>
-            <img class="w-10 h-10 rounded-full mr-4" src="{{ $offer->creator->avatarUrl }}" alt="{{ $offer->creator->name }}" />
+            <img class="w-10 h-10 rounded-full mx-4" src="{{ $offer->creator->avatarUrl }}" alt="{{ $offer->creator->name }}" />
         </div>
     </div>
 </a>
